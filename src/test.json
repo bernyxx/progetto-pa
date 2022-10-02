@@ -1,0 +1,11 @@
+{
+  "matchID": "dwcwr8382m",
+  "team1": "g2",
+  "team2": "liquid",
+  "coachTeam1" : "x",
+  "coachTeam2" : null,
+  "stats": [
+    { "player": "player1", "kills": 22, "deaths": 15 },
+    { "player": "player2", "kills": 22, "deaths": 15 }
+  ]
+}
