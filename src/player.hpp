@@ -10,7 +10,7 @@
 
 #include <vector>
 #include "person.hpp"
-#include "PlayerMatch.hpp"
+#include "playerMatch.hpp"
 
 enum PlayerRole {
 	LURKER, ENTRY, SUPPORT, IGL

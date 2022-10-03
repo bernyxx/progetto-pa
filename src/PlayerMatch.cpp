@@ -5,8 +5,9 @@
  *      Author: Kevin
  */
 
+#include "playerMatch.hpp"
+
 #include <iostream>
-#include "PlayerMatch.hpp"
 
 PlayerMatch::PlayerMatch(int k, int a, int d){
 	kills = k;
