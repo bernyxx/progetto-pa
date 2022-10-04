@@ -14,58 +14,50 @@
 #include "player.hpp"
 #include "coach.hpp"
 #include "organization.hpp"
+#include "matchManager.cpp"
+
+void printOrganizations(std::vector<Organization*> *db) {
+	for (std::vector<Organization*>::iterator i = db->begin(); i != db->end();
+			++i) {
+		std::cout << (*i)->getName() << std::endl;
+	}
+}
+
+int main() {
+
+	try {
+		std::vector<Organization*> organizations;
+
+		Player *p1 = new Player("Kevin", "Bernardi", 22, "bernyx", ENTRY,
+				ACTIVE);
+
+		Coach *c1 = new Coach("Capo", "Capi", 33, "capituu");
+		Coach *c2 = new Coach("Suini", "Gini", 29, "saigino");
+
+		Player *p2 = new Player("Kevin", "Second", 22, "ginetti", ENTRY,
+				ACTIVE);
+
+		Organization *org = new Organization("G2", &organizations);
+		Organization *org2 = new Organization("Liquid", &organizations);
+
+		org->addPlayer(p1);
+		org2->addPlayer(p2);
+
+		MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json", &organizations);
+		MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json", &organizations);
+		MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json", &organizations);
+
+		p1->printMatches();
+		p2->printMatches();
+
+		p1->printStats();
+		p2 -> printStats();
 
 
 
 
-
-int main()
-{
-
-	std::vector<Organization*> organizations;
-
-    // std::cout << "CSGO" << std::endl;
-
-    Person *p = new Person("Gino", "Geppetti", 25);
-    std::cout << p->toString() << std::endl;
-    std::cout << p->getAge() << std::endl;
-    delete p;
-
-    Player *pl = new Player("Kevin", "Bernardi", 22, "bernyx", ENTRY, ACTIVE );
-    std::cout << pl->toString() << std::endl;
-//    std::cout << pl->getRole() << std::endl;
-//    std::cout << pl->getStatus() << std::endl;
-
-    Coach* c1 = new Coach("Capo", "Capi", 33, "capituu");
-    std::cout << c1->toString() << std::endl;
-
-    Player *p2 = new Player("Kevin", "Second", 22, "ginetti", ENTRY, ACTIVE );
-
-    Organization* org = new Organization("G2", &organizations);
-    Organization* org2 = new Organization("Liquid", &organizations);
-
-
-    org->addPlayer(pl);
-    org2->addPlayer(p2);
-
-    pl->unsetTeam();
-    org2->addPlayer(pl);
-    org->setCoach(c1);
-
-    std::cout << pl->toString() << std::endl;
-    std::cout << p2->toString() << std::endl;
-
-
-
-//    for (std::vector<Organization*>::iterator i = organizations.begin(); i != organizations.end(); ++i) {
-//    	std::cout << (*i)->getName() << std::endl;
-//    }
-//    org->print();
-
-
-
-
-
-
+	} catch (std::exception &e) {
+		std::cout << "EXCEPTION: " << e.what() << std::endl;
+	}
 
 }

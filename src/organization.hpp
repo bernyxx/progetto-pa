@@ -34,6 +34,8 @@ public:
 
 	void addPlayer(Player*);
 	void removePlayer(std::string);
+	Player* getPlayer(std::string);
+	bool hasPlayer(std::string);
 
 };
 

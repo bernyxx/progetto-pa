@@ -9,34 +9,63 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <memory>
 #include "../nlohmann/json.hpp"
+#include "organization.hpp"
 #include "player.hpp"
 
 using json = nlohmann::json;
 
+class MatchManager {
 
-class MatchManager{
+public:
 
-	static Player* findPlayer(std::vector<Player*> *db,std::string nickname){
+	static Player* findPlayer(std::vector<Organization*> *db,
+			std::string nickname) {
 
-		for (std::vector<Player*>::iterator i = db->begin(); i != db->end(); ++i) {
-			if((*i)->getName() == nickname){
-				return *i;
+		for (std::vector<Organization*>::iterator i = db->begin();
+				i != db->end(); ++i) {
+			if ((*i)->hasPlayer(nickname)) {
+				Player *pl = (*i)->getPlayer(nickname);
+				return pl;
 			}
 		}
-
-		throw "Player not found!";
+		throw std::runtime_error("Player not found!");
 	}
 
-	static void checkPlayer(Player* pl, std::string team1, std::string team2){
-		if ((pl->getTeam() == team1) || (pl->getTeam() == team2)){
+	static Coach* findCoach(std::vector<Organization*> *db,
+			std::string nickname) {
+
+		for (std::vector<Organization*>::iterator i = db->begin();
+				i != db->end(); ++i) {
+			if ((*i)->getCoach()->getNickname() == nickname) {
+				Coach *c = (*i)->getCoach();
+				return c;
+			}
+		}
+		throw std::runtime_error("Coach not found!");
+	}
+
+	static void checkPlayer(Player *pl, std::string team1, std::string team2) {
+		if ((pl->getTeam() == team1) || (pl->getTeam() == team2)) {
 			return;
 		}
 
-		throw "checkPlayer ERROR: Player is not part of the team specified in the JSON file!";
+		throw std::runtime_error(
+				"Player is not part of the team specified in the JSON file!");
+
 	}
 
-	static void newMatch(std::vector<Player*> *db, std::string filePath){
+	static void checkCoach(Coach *c, std::string team) {
+		if ((c->getTeam() == team)) {
+			return;
+		}
+
+		throw std::runtime_error(
+				"Player is not part of the team specified in the JSON file!");
+	}
+
+	static void newMatch(std::string filePath, std::vector<Organization*> *db) {
 
 		// parse json file
 		std::ifstream f(filePath);
@@ -45,21 +74,53 @@ class MatchManager{
 		std::string team1 = data["team1"];
 		std::string team2 = data["team2"];
 
-		for(int i=0; i<10; i++){
+		std::string coach1 = data["coach1"];
+		std::string coach2 = data["coach2"];
+
+		int numPlayers = data["numPlayers"];
+		int numPlayersPerTeam = numPlayers / 2;
+
+		double sumKD1 = 0;
+		double sumKD2 = 0;
+
+		// add match for every player
+		for (int i = 0; i < numPlayers; i++) {
 			std::string nickname = data["stats"][i]["player"];
-			Player* pl = findPlayer(db, nickname);
+
+			Player *pl = findPlayer(db, nickname);
 
 			// check if the player is part of the team specified in team1/team2 in the JSON file
 			checkPlayer(pl, team1, team2);
 
+			int kills = data["stats"][i]["kills"];
+			int assists = data["stats"][i]["assists"];
+			int deaths = data["stats"][i]["deaths"];
 
-			//TODO: Smart pointer
-			PlayerMatch* pm = new PlayerMatch(18, 3, 19);
+			double kd = round((kills / (double) deaths) * 100) / 100;
+
+			PlayerMatch *pm = new PlayerMatch(kills, assists, deaths, kd);
 			pl->addMatch(pm);
+
+			if (i < numPlayersPerTeam) {
+				sumKD1 += kd;
+			} else {
+				sumKD2 += kd;
+			}
+
 		}
 
+		// add match for the coach
 
-		std::cout << data["stats"][0]["kills"] << std::endl;
+		// coach for team 1
+		Coach *c1 = findCoach(db, coach1);
+		checkCoach(c1, team1);
+		c1->addMatch(sumKD1 / numPlayersPerTeam);
+
+		// coach for team 2
+		Coach *c2 = findCoach(db, coach2);
+		checkCoach(c2, team2);
+		c2->addMatch(sumKD2 / numPlayersPerTeam);
+
 	}
 };
 

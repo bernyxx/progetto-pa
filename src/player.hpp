@@ -33,25 +33,46 @@ public:
 	Player(std::string, std::string, int, std::string, PlayerRole, Status);
 	virtual ~Player();
 
+	std::string toString();
+
+	// Player role methods
 	PlayerRole getRole();
 	void changeRole(PlayerRole);
 
+	// Player status methods
 	Status getStatus();
 	void changeStatus(Status);
 
+	// Player nickname
 	std::string getNickname();
 
+	// Player team methods
 	bool hasTeam();
 	std::string getTeam();
 	void setTeam(std::string);
 	void unsetTeam();
 
-	std::string toString();
-
+	// Operator overload for players comparison
 	bool operator>(Player&);
 	bool operator< (Player&);
 
+	// Player matches methods
 	void addMatch(PlayerMatch*);
+	void printMatches();
+
+	// Player stats methods
+	int getTotalKills();
+	int getTotalAssists();
+	int getTotalDeaths();
+	double getTotalKD();
+
+	double getAvgKills();
+	double getAvgAssists();
+	double getAvgDeaths();
+	double getAvgKD();
+
+	void printStats();
+
 };
 
 

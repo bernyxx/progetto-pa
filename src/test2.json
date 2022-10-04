@@ -1,0 +1,10 @@
+{
+  "matchID": "dwcwr8382m",
+  "team1": "G2",
+  "team2": "Liquid",
+  "numPlayers" : 2,
+  "stats": [
+    { "player": "bernyx", "kills": 19, "assists" : 7, "deaths": 22 },
+    { "player": "ginetti", "kills": 15, "assists" : 3, "deaths": 14 }
+  ]
+}

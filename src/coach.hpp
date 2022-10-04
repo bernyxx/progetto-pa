@@ -16,7 +16,7 @@ class Coach : public Person{
 private:
 	std::string nickname;
 	std::string team;
-	std::vector<int> matches;
+	std::vector<double> matches;
 
 public:
 	Coach(std::string, std::string, int, std::string);
@@ -31,7 +31,8 @@ public:
 
 	std::string toString();
 
-	void addMatch(int);
+	void addMatch(double);
+	double getRating();
 
 };
 

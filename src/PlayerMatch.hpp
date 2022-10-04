@@ -13,12 +13,13 @@ private:
 	int kills;
 	int assists;
 	int deaths;
+	double kd;
 
 public:
-	PlayerMatch(int, int, int);
+	PlayerMatch(int, int, int, double);
 	~PlayerMatch();
-
-
+	int* getValues();
+	double getKD();
 };
 
 

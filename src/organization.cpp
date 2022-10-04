@@ -9,10 +9,10 @@
 #include <vector>
 #include "organization.hpp"
 
-Organization::Organization(std::string name, std::vector<Organization*> *v){
+Organization::Organization(std::string name, std::vector<Organization*> *db){
 	this->name = name;
 	this->coach = NULL;
-	v->push_back(this);
+	db->push_back(this);
 }
 
 Organization::~Organization(){
@@ -62,6 +62,10 @@ Coach* Organization::getCoach(){
 }
 
 void Organization::setCoach(Coach* c){
+	if(c->hasTeam()){
+		throw std::runtime_error("Can't add a coach who is still a part of another team!");
+		return;
+	}
 	coach = c;
 	c->setTeam(name);
 }
@@ -75,9 +79,10 @@ void Organization::removeCoach(){
 // players methods+
 void Organization::addPlayer(Player* pl){
 	if(pl->hasTeam()){
-		std::cout << "Can't add a player who is still a part of another team!" << std::endl;
+		throw "Can't add a player who is still a part of another team!";
 		return;
 	}
+
 	players.push_back(pl);
 	pl->setTeam(name);
 }
@@ -102,12 +107,43 @@ void Organization::removePlayer(std::string nn) {
 		players.at(index)->unsetTeam();
 		// remove the player from the vector
 		players.erase(players.begin() + index);
-	} else {
-		std::cout<< "Player to remove don't found!" << std::endl;
+		return;
 	}
+
+	throw std::runtime_error("Player to remove don't found!") ;
 
 
 }
+
+Player* Organization::getPlayer(std::string nn) {
+
+	// find the index of the player to remove
+	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+
+		if ((*i)->getNickname() == nn) {
+			return *i;
+		}
+	}
+
+
+	throw "Player don't found!";
+
+}
+
+bool Organization::hasPlayer(std::string nn) {
+
+	// find the index of the player to remove
+	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+
+		if ((*i)->getNickname() == nn) {
+			return true;
+		}
+	}
+
+	return false;
+
+}
+
 
 
 

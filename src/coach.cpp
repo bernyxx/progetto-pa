@@ -43,11 +43,25 @@ std::string Coach::toString(){
 	std::stringstream ss;
 	if(team == ""){
 		ss << "COACH | Nickname:" << nickname << " | NO TEAM";
-	} else {
+	} else if(matches.size() > 0){
+		ss << "COACH | Nickname:" << nickname << " | Team:" << team << " | Rating:" << getRating();
+	}else{
 		ss << "COACH | Nickname:" << nickname << " | Team:" << team;
 	}
-
 	return ss.str();
+}
+
+void Coach::addMatch(double kd){
+	matches.push_back(kd);
+}
+
+double Coach::getRating(){
+	double total = 0;
+	for(double kd: matches){
+		total += kd;
+	}
+
+	return total / matches.size();
 }
 
 
