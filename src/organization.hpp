@@ -29,6 +29,7 @@ public:
 	Coach* getCoach();
 	void setCoach(Coach*);
 	void removeCoach();
+	bool hasCoach();
 
 	// players methods
 

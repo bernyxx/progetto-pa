@@ -75,6 +75,10 @@ void Organization::removeCoach(){
 	coach = NULL;
 }
 
+bool Organization::hasCoach(){
+	return coach != NULL;
+}
+
 
 // players methods+
 void Organization::addPlayer(Player* pl){

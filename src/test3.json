@@ -2,9 +2,9 @@
   "matchID": "dwcwr8382m",
   "team1": "G2",
   "team2": "Liquid",
-  "numPlayers" : 2,
-  "stats": [
-    { "player": "bernyx", "kills": 17, "assists" : 1, "deaths": 13 },
-    { "player": "ginetti", "kills": 18, "assists" : 2, "deaths": 11 }
-  ]
+  "coach1": "capituu",
+  "coach2": "saigino",
+  "numPlayers": 2,
+  "stats1": [{ "player": "bernyx", "kills": 9, "assists": 2, "deaths": 14 }],
+  "stats2": [{ "player": "ginetti", "kills": 13, "assists": 4, "deaths": 10 }]
 }

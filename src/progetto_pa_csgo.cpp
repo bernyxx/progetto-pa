@@ -40,6 +40,9 @@ int main() {
 		Organization *org = new Organization("G2", &organizations);
 		Organization *org2 = new Organization("Liquid", &organizations);
 
+//		org->setCoach(c1);
+//		org2->setCoach(c2);
+
 		org->addPlayer(p1);
 		org2->addPlayer(p2);
 
@@ -51,7 +54,7 @@ int main() {
 		p2->printMatches();
 
 		p1->printStats();
-		p2 -> printStats();
+		p2->printStats();
 
 
 
