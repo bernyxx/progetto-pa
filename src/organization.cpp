@@ -131,7 +131,25 @@ Player* Organization::getPlayer(std::string nn) {
 
 
 	throw "Player don't found!";
+}
 
+Player* Organization::getBestPlayer(){
+
+	double maxAvgKD = 0;
+	int maxIndex = 0;
+	int index = 0;
+
+	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+
+		if((*i)->getAvgKD() > maxAvgKD){
+			maxAvgKD = (*i)->getAvgKD();
+			maxIndex = index;
+		}
+
+		index++;
+	}
+
+	return players.at(maxIndex);
 }
 
 bool Organization::hasPlayer(std::string nn) {
@@ -145,7 +163,6 @@ bool Organization::hasPlayer(std::string nn) {
 	}
 
 	return false;
-
 }
 
 

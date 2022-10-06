@@ -29,6 +29,10 @@ public:
 	void setTeam(std::string);
 	void unsetTeam();
 
+	// Operator overload for players comparison
+	bool operator>(Coach&);
+	bool operator<(Coach&);
+
 	std::string toString();
 
 	void addMatch(double);

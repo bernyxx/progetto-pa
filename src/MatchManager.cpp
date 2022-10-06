@@ -14,14 +14,10 @@
 #include "../nlohmann/json.hpp"
 #include "organization.hpp"
 #include "player.hpp"
+#include "customRound.hpp"
 
 using json = nlohmann::json;
 
-
-struct mapTypes{
-	int i;
-	std::string s;
-};
 
 class MatchManager {
 
@@ -37,8 +33,7 @@ public:
 				return pl;
 			}
 		}
-		//throw std::runtime_error("Player not found!");
-		return NULL;
+		throw std::runtime_error("Player not found!");
 	}
 
 	static Coach* findCoach(std::vector<Organization*> *db, std::string nickname) {
@@ -101,7 +96,7 @@ public:
 				int assists = data[key][i]["assists"];
 				int deaths = data[key][i]["deaths"];
 
-				double kd = round((kills / (double) deaths) * 100) / 100;
+				double kd = customRound(kills / (double) deaths);
 
 				PlayerMatch *pm = new PlayerMatch(kills, assists, deaths, kd);
 				pl->addMatch(pm);

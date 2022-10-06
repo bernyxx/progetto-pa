@@ -1,10 +1,21 @@
 {
-  "matchID": "dwcwr8382m",
-  "team1": "G2",
-  "team2": "Liquid",
-  "coach1": "capituu",
-  "coach2": "saigino",
-  "numPlayers": 2,
-  "stats1": [{ "player": "bernyx", "kills": 19, "assists": 4, "deaths": 12 }],
-  "stats2": [{ "player": "ginetti", "kills": 6, "assists": 5, "deaths": 10 }]
+  "team1": "Liquid",
+  "team2": "G2",
+  "coach1": "saigino",
+  "coach2": "capituu",
+  "numPlayers": 10,
+  "stats1": [
+    { "player": "water", "kills": 20, "assists": 2, "deaths": 17 },
+    { "player": "rain", "kills": 15, "assists": 1, "deaths": 12 },
+    { "player": "snow", "kills": 13, "assists": 3, "deaths": 10 },
+    { "player": "ice", "kills": 17, "assists": 0, "deaths": 14 },
+    { "player": "steam", "kills": 14, "assists": 2, "deaths": 12 }
+  ],
+  "stats2": [
+    { "player": "pino", "kills": 15, "assists": 2, "deaths": 12 },
+    { "player": "lino", "kills": 13, "assists": 1, "deaths": 17 },
+    { "player": "gino", "kills": 12, "assists": 2, "deaths": 18 },
+    { "player": "bino", "kills": 16, "assists": 4, "deaths": 16 },
+    { "player": "nino", "kills": 15, "assists": 3, "deaths": 15 }
+  ]
 }

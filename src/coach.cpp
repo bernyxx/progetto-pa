@@ -5,10 +5,11 @@
  *      Author: Kevin
  */
 
-#include "coach.hpp"
 
 #include <iostream>
 #include <sstream>
+#include "coach.hpp"
+#include "customRound.hpp"
 
 Coach::Coach(std::string name, std::string surname, int age, std::string nickname) : Person(name, surname, age){
 	this->nickname = nickname;
@@ -39,6 +40,14 @@ void Coach::unsetTeam(){
 	team = "";
 }
 
+bool Coach::operator>(Coach& c){
+	return getRating() > c.getRating();
+}
+
+bool Coach::operator<(Coach& c){
+	return !Coach::operator>(c);
+}
+
 std::string Coach::toString(){
 	std::stringstream ss;
 	if(team == ""){
@@ -61,8 +70,10 @@ double Coach::getRating(){
 		total += kd;
 	}
 
-	return total / matches.size();
+	return customRound(total / (double) matches.size());
 }
+
+
 
 
 

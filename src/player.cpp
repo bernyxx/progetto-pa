@@ -7,12 +7,10 @@
 
 #include <iostream>
 #include <sstream>
-#include <cmath>
-#include "player.hpp"
 
-double customRound(double value){
-	return (round(value * 100)) / 100;
-}
+#include "player.hpp"
+#include "customRound.hpp"
+
 
 Player::Player(std::string name, std::string surname, int age, std::string nickname, PlayerRole pr, Status st) : Person(name, surname, age){
 	this->nickname = nickname;
@@ -75,6 +73,8 @@ std::string Player::toString(){
 	std::stringstream ss;
 	if(team == ""){
 		ss << "PLAYER | Nickname:" << nickname << " | NO TEAM";
+	} else if(matches.size() > 0){
+		ss << "PLAYER | Nickname:" << nickname << " | Team:" << team << " | Rating: " << getAvgKD();
 	} else {
 		ss << "PLAYER | Nickname:" << nickname << " | Team:" << team;
 	}

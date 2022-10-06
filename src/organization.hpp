@@ -36,6 +36,7 @@ public:
 	void addPlayer(Player*);
 	void removePlayer(std::string);
 	Player* getPlayer(std::string);
+	Player* getBestPlayer();
 	bool hasPlayer(std::string);
 
 };
