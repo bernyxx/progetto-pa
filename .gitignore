@@ -1,0 +1,7 @@
+.vscode
+.settings
+haskell/scraper.hi
+haskell/scraper.o
+haskell/scraper.exe
+haskell/scraper
+src/progetto_pa_csgo

@@ -61,9 +61,14 @@ int main() {
 
 
 
-		MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json", &organizations);
-		MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json", &organizations);
-		MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json", &organizations);
+		// MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json", &organizations);
+		// MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json", &organizations);
+		// MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json", &organizations);
+
+		MatchManager::newMatch("./test.json", &organizations);
+		MatchManager::newMatch("./test2.json", &organizations);
+		MatchManager::newMatch("./test3.json", &organizations);
+
 
 		p1->printMatches();
 //		p6->printMatches();
