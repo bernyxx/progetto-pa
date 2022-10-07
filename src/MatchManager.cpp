@@ -9,8 +9,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <map>
 #include <memory>
+#include <algorithm>
 #include "../nlohmann/json.hpp"
 #include "organization.hpp"
 #include "player.hpp"
@@ -26,28 +26,43 @@ public:
 	static Player* findPlayer(std::vector<Organization*> *db,
 			std::string nickname) {
 
-		for (std::vector<Organization*>::iterator i = db->begin();
-				i != db->end(); ++i) {
-			if ((*i)->hasPlayer(nickname)) {
-				Player *pl = (*i)->getPlayer(nickname);
-				return pl;
-			}
+//		for (std::vector<Organization*>::iterator i = db->begin();
+//				i != db->end(); ++i) {
+//			if ((*i)->hasPlayer(nickname)) {
+//				Player *pl = (*i)->getPlayer(nickname);
+//				return pl;
+//			}
+//		}
+
+		std::vector<Organization*>::iterator it = std::find_if(db->begin(),db->end(), [nickname](Organization *org) {return org->hasPlayer(nickname);});
+
+		if (it != db->end()) {
+			return (*it)->getPlayer(nickname);
 		}
+
 		throw std::runtime_error("Player not found!");
 	}
 
 	static Coach* findCoach(std::vector<Organization*> *db, std::string nickname) {
 
-		for (std::vector<Organization*>::iterator i = db->begin();
-				i != db->end(); ++i) {
-			if ((*i)->hasCoach()) {
-				if ((*i)->getCoach()->getNickname() == nickname) {
-					Coach *c = (*i)->getCoach();
-					return c;
-				}
-			}
+//		for (std::vector<Organization*>::iterator i = db->begin();
+//				i != db->end(); ++i) {
+//			if ((*i)->hasCoach()) {
+//				if ((*i)->getCoach()->getNickname() == nickname) {
+//					Coach *c = (*i)->getCoach();
+//					return c;
+//				}
+//			}
+//
+//		}
 
+		std::vector<Organization*>::iterator it = std::find_if(db->begin(), db->end(), [nickname](Organization* org){if(org->hasCoach()){return org->getCoach()->getNickname() == nickname;} else {return false;}});
+
+		if(it != db->end()){
+			return (*it)->getCoach();
 		}
+
+
 		throw std::runtime_error("Coach not found!");
 	}
 

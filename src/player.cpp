@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 #include "player.hpp"
 #include "customRound.hpp"
@@ -88,10 +89,15 @@ void Player::addMatch(PlayerMatch* pm){
 
 void Player::printMatches(){
 
-	for (std::vector<PlayerMatch*>::iterator i = matches.begin(); i != matches.end(); ++i) {
-		int* results = (*i)->getValues();
+//	for (std::vector<PlayerMatch*>::iterator i = matches.begin(); i != matches.end(); ++i) {
+//		int* results = (*i)->getValues();
+//		std::cout << "MATCH | Kills:" << results[0] << " | Assists:" << results[1] << " | Deaths:" << results[2] << std::endl;
+//	}
+
+	std::for_each(matches.begin(), matches.end(), [](PlayerMatch *pm){
+		int* results = pm->getValues();
 		std::cout << "MATCH | Kills:" << results[0] << " | Assists:" << results[1] << " | Deaths:" << results[2] << std::endl;
-	}
+	});
 }
 
 int Player::getTotalKills(){

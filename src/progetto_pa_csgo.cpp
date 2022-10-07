@@ -59,23 +59,27 @@ int main() {
 		org2->addPlayer(p9);
 		org2->addPlayer(p10);
 
+
+
 		MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json", &organizations);
 		MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json", &organizations);
 		MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json", &organizations);
 
 		p1->printMatches();
-		p6->printMatches();
-
-		p1->printStats();
-		p6->printStats();
-
-		std::cout << c1->toString() << std::endl;
-		std::cout << c2->toString() << std::endl;
-
-		org->print();
-
-		std::cout << "Best Player" << std::endl;
-		std::cout << org->getBestPlayer()->toString() << std::endl;
+//		p6->printMatches();
+//
+//		p1->printStats();
+//		p6->printStats();
+//
+//		std::cout << c1->toString() << std::endl;
+//		std::cout << c2->toString() << std::endl;
+//
+//		org->print();
+//
+//		org2->print();
+//
+//		std::cout << "Best Player" << std::endl;
+//		std::cout << org->getBestPlayer()->toString() << std::endl;
 
 
 

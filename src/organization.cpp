@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "organization.hpp"
 
 Organization::Organization(std::string name, std::vector<Organization*> *db){
@@ -42,7 +43,7 @@ void Organization::print(){
 
 
 	std::cout << std::endl;
-			std::cout << "Coach" << std::endl;
+	std::cout << "Coach" << std::endl;
 
 	if (coach != NULL) {
 
@@ -93,26 +94,38 @@ void Organization::addPlayer(Player* pl){
 
 void Organization::removePlayer(std::string nn) {
 
-	int index = 0;
-	bool found = false;
+//	int index = 0;
+//	bool found = false;
+//
+//	// find the index of the player to remove
+//	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+//
+//		if ((*i)->getNickname() == nn) {
+//			found = true;
+//			break;
+//		}
+//
+//		index++;
+//	}
+//
+//
+//	if(found == true){
+//		players.at(index)->unsetTeam();
+//		// remove the player from the vector
+//		players.erase(players.begin() + index);
+//		return;
+//	}
 
-	// find the index of the player to remove
-	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+	std::vector<Player*>::iterator it = std::find_if(players.begin(),players.end(), [nn](Player *pl) {return pl->getNickname() == nn;});
 
-		if ((*i)->getNickname() == nn) {
-			found = true;
-			break;
-		}
-
-		index++;
-	}
-
-	if(found == true){
+	if(it != players.end()){
+		int index = std::distance(players.begin(), it);
 		players.at(index)->unsetTeam();
 		// remove the player from the vector
 		players.erase(players.begin() + index);
 		return;
 	}
+
 
 	throw std::runtime_error("Player to remove don't found!") ;
 
@@ -121,12 +134,17 @@ void Organization::removePlayer(std::string nn) {
 
 Player* Organization::getPlayer(std::string nn) {
 
-	// find the index of the player to remove
-	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+//	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+//
+//		if ((*i)->getNickname() == nn) {
+//			return *i;
+//		}
+//	}
 
-		if ((*i)->getNickname() == nn) {
-			return *i;
-		}
+	std::vector<Player*>::iterator it = std::find_if(players.begin(),players.end(), [nn](Player *pl) {return pl->getNickname() == nn;});
+
+	if (it != players.end()) {
+			return *it;
 	}
 
 
@@ -154,12 +172,18 @@ Player* Organization::getBestPlayer(){
 
 bool Organization::hasPlayer(std::string nn) {
 
-	// find the index of the player to remove
-	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+//	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+//
+//		if ((*i)->getNickname() == nn) {
+//			return true;
+//		}
+//	}
 
-		if ((*i)->getNickname() == nn) {
-			return true;
-		}
+
+	std::vector<Player*>::iterator it = std::find_if(players.begin(),players.end(), [nn](Player *pl) {return pl->getNickname() == nn;});
+
+	if (it != players.end()) {
+		return true;
 	}
 
 	return false;
