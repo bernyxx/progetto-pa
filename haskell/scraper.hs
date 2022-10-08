@@ -12,11 +12,13 @@ occu :: Ord a => [a] -> [(Int, a)]
 occu [] = []
 occu list = map (\l -> (length l, head l)) (group (sort list))
 
+main :: IO ()
 main = do
   url <- getLine
   text <- formatText url
   print text
 
+formatText :: [Char] -> IO [(Int, [Char])]
 formatText url = do
   wiki <- scrape_titles url
   let text = fromJust wiki
