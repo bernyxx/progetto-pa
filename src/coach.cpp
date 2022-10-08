@@ -16,6 +16,12 @@ Coach::Coach(std::string name, std::string surname, int age, std::string nicknam
 	team = "";
 }
 
+Coach::Coach(std::string name, std::string surname, int age, std::string nickname, std::vector<double>* matches) : Person(name, surname, age){
+	this->nickname = nickname;
+	this->matches = *matches;
+	team = "";
+}
+
 Coach::~Coach(){
 	std::cout << "Distr. Coach" << std::endl;
 }
@@ -72,6 +78,10 @@ double Coach::getRating(){
 
 	return customRound(total / (double) matches.size());
 }
+
+std::vector<double>* Coach::getCoachMatches(){
+	return &matches;
+};
 
 
 

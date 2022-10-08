@@ -12,7 +12,7 @@
 #include <vector>
 #include "person.hpp"
 
-class Coach : public Person{
+class Coach : virtual public Person{
 private:
 	std::string nickname;
 	std::string team;
@@ -20,23 +20,26 @@ private:
 
 public:
 	Coach(std::string, std::string, int, std::string);
+	Coach(std::string, std::string, int, std::string, std::vector<double>*);
 	virtual ~Coach();
 
-	std::string getNickname();
+	virtual std::string getNickname();
 
-	bool hasTeam();
-	std::string getTeam();
-	void setTeam(std::string);
-	void unsetTeam();
+	virtual bool hasTeam();
+	virtual std::string getTeam();
+	virtual void setTeam(std::string);
+	virtual void unsetTeam();
 
 	// Operator overload for players comparison
-	bool operator>(Coach&);
-	bool operator<(Coach&);
+	virtual bool operator>(Coach&);
+	virtual bool operator<(Coach&);
 
-	std::string toString();
+	virtual std::string toString();
 
-	void addMatch(double);
-	double getRating();
+	virtual void addMatch(double);
+	virtual double getRating();
+
+	virtual std::vector<double>* getCoachMatches();
 
 };
 

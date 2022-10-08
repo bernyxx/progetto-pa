@@ -15,6 +15,7 @@
 #include "coach.hpp"
 #include "organization.hpp"
 #include "matchManager.cpp"
+#include "retired.hpp"
 
 void printOrganizations(std::vector<Organization*> *db) {
 	for (std::vector<Organization*>::iterator i = db->begin(); i != db->end();
@@ -37,7 +38,8 @@ int main() {
 		Player *p7 = new Player("Ginetti", "Bin", 23, "rain", ENTRY, ACTIVE);
 		Player *p8 = new Player("Ginetti", "Bin", 28, "snow", LURKER, ACTIVE);
 		Player *p9 = new Player("Ginetti", "Bin", 22, "ice", LURKER, ACTIVE);
-		Player *p10 = new Player("Ginetti", "Bin", 27, "steam", SUPPORT, ACTIVE);
+		Player *p10 = new Player("Ginetti", "Bin", 27, "steam", SUPPORT,
+				ACTIVE);
 
 		Coach *c1 = new Coach("Capo", "Capi", 33, "capituu");
 		Coach *c2 = new Coach("Suini", "Gini", 29, "saigino");
@@ -59,18 +61,75 @@ int main() {
 		org2->addPlayer(p9);
 		org2->addPlayer(p10);
 
+//		std::cout << p1->getTeam() << std::endl;
+
+		MatchManager::newMatch(
+				"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json",
+				&organizations);
+		MatchManager::newMatch(
+				"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json",
+				&organizations);
+		MatchManager::newMatch(
+				"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json",
+				&organizations);
+
+//		MatchManager::newMatch("./test.json", &organizations);
+//		MatchManager::newMatch("./test2.json", &organizations);
+//		MatchManager::newMatch("./test3.json", &organizations);
+
+//		Retired *r1 = new Retired(p1);
+//		std::cout << r1->getTeam() << std::endl;
+//		std::cout << r1->getRole() << std::endl;
+		//		r1->addMatch();
+		//		r1->changeRole(LURKER);
+		//		r1->changeStatus(ACTIVE);
+//		std::cout << r1->getAge() << std::endl;
+//		std::cout << r1->getAvgAssists() << std::endl;
+//		std::cout << r1->getAvgDeaths() << std::endl;
+//		std::cout << r1->getAvgKD() << std::endl;
+//		std::cout << r1->getRating() << std::endl;
+//		std::cout << r1->getAvgKills() << std::endl;
+//		std::cout << r1->getName() << std::endl;
+//		std::cout << r1->getNickname() << std::endl;
+//		std::cout << r1->getRole() << std::endl;
+//		std::cout << r1->getStatus() << std::endl;
+//		std::cout << r1->getSurname() << std::endl;
+//		std::cout << r1->getTeam() << std::endl;
+//		std::cout << r1->getTotalAssists() << std::endl;
+//		std::cout << r1->getTotalDeaths() << std::endl;
+//		std::cout << r1->getTotalKD() << std::endl;
+//		std::cout << r1->getTotalKills() << std::endl;
+//		std::cout << r1->hasTeam() << std::endl;
+//
+//		Retired *rc = new Retired(p3);
+//		std::cout << (*r1 > *rc) << std::endl;
+//		std::cout << (*r1 < *rc) << std::endl;
+//
+//		r1->printMatches();
+//		r1->printStats();
+//			r1->setTeam("blue");
+
+//		std::cout << r1->toString() << std::endl;
+//		r1->unsetTeam();
+
+		//----------------------------------------------------------
+
+		Retired *r2 = new Retired(c1);
+		std::cout << r2->getTeam() << std::endl;//
+		std::cout << r2->getRole() << std::endl;//
 
 
-		// MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json", &organizations);
-		// MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json", &organizations);
-		// MatchManager::newMatch("D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json", &organizations);
+		Retired *rc2 = new Retired(c2);
+		std::cout << (*r2 > *rc2) << std::endl;//
+		std::cout << (*r2 < *rc2) << std::endl;//
 
-		MatchManager::newMatch("./test.json", &organizations);
-		MatchManager::newMatch("./test2.json", &organizations);
-		MatchManager::newMatch("./test3.json", &organizations);
+		r2->printMatches();
+//		r2->printStats();
+//		r2->setTeam("blue");
+		std::cout << r2->toString() << std::endl;
+//		r2->unsetTeam();
 
-
-		p1->printMatches();
+//		p1->printMatches();
 //		p6->printMatches();
 //
 //		p1->printStats();
@@ -85,9 +144,6 @@ int main() {
 //
 //		std::cout << "Best Player" << std::endl;
 //		std::cout << org->getBestPlayer()->toString() << std::endl;
-
-
-
 
 	} catch (std::exception &e) {
 		std::cout << "EXCEPTION: " << e.what() << std::endl;

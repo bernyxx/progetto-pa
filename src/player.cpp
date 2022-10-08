@@ -20,6 +20,15 @@ Player::Player(std::string name, std::string surname, int age, std::string nickn
 	status = st;
 }
 
+Player::Player(std::string name, std::string surname, int age, std::string nickname, PlayerRole pr, Status st, std::vector<PlayerMatch*>* matches) : Person(name, surname, age){
+	this->nickname = nickname;
+	team = "";
+	role = pr;
+	status = st;
+	this->matches = *matches;
+}
+
+
 Player::~Player(){
 	std::cout << "Distr. Player" << std::endl;
 }
@@ -164,6 +173,10 @@ void Player::printStats(){
 	std::cout << "Average assists per match: " << getAvgAssists() << std::endl;
 	std::cout << "Average KD ratio per match: " << getAvgKD() << std::endl;
 }
+
+std::vector<PlayerMatch*>* Player::getPlayerMatches(){
+	return &matches;
+};
 
 
 

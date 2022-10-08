@@ -13,14 +13,14 @@
 #include "playerMatch.hpp"
 
 enum PlayerRole {
-	LURKER, ENTRY, SUPPORT, IGL
+	NONE, LURKER, ENTRY, SUPPORT, IGL
 };
 
 enum Status{
-	ACTIVE, BENCHED
+	ACTIVE, BENCHED, RETIRED
 };
 
-class Player : public Person{
+class Player : virtual public Person{
 private:
 	std::string nickname;
 	std::string team;
@@ -31,20 +31,21 @@ private:
 
 public:
 	Player(std::string, std::string, int, std::string, PlayerRole, Status);
+	Player(std::string, std::string, int, std::string, PlayerRole, Status, std::vector<PlayerMatch*>*);
 	virtual ~Player();
 
-	std::string toString();
+	virtual std::string toString();
 
 	// Player role methods
-	PlayerRole getRole();
-	void changeRole(PlayerRole);
+	virtual PlayerRole getRole();
+	virtual void changeRole(PlayerRole);
 
 	// Player status methods
-	Status getStatus();
-	void changeStatus(Status);
+	virtual Status getStatus();
+	virtual void changeStatus(Status);
 
 	// Player nickname
-	std::string getNickname();
+	virtual std::string getNickname();
 
 	// Player team methods
 	bool hasTeam();
@@ -72,6 +73,8 @@ public:
 	double getAvgKD();
 
 	void printStats();
+
+	std::vector<PlayerMatch*>* getPlayerMatches();
 
 };
 
