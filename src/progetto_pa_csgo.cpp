@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <memory>
 #include "person.hpp"
 #include "player.hpp"
 #include "coach.hpp"
@@ -9,84 +10,102 @@
 #include "matchManager.cpp"
 #include "retired.hpp"
 
+// funzione per stampare la lista di organizzazioni contenute nel vettore "db"
 void printOrganizations(std::vector<Organization*> *db) {
+	std::cout << "----- ORGANIZATIONS LIST -----" << std::endl;
 	for (std::vector<Organization*>::iterator i = db->begin(); i != db->end();
 			++i) {
 		std::cout << (*i)->getName() << std::endl;
 	}
+	std::cout << "--------------------" << std::endl;
 }
 
 int main() {
 
 	try {
+		// vettore di tutte le organizzazioni
 		std::vector<Organization*> organizations;
 
-		Player *p1 = new Player("Bino", "Sinni", 22, "pino", ENTRY, ACTIVE);
-		Player *p2 = new Player("Ginetti", "Bin", 19, "lino", IGL, ACTIVE);
-		Player *p3 = new Player("Ginetti", "Bin", 24, "gino", LURKER, ACTIVE);
-		Player *p4 = new Player("Ginetti", "Bin", 23, "bino", SUPPORT, ACTIVE);
-		Player *p5 = new Player("Ginetti", "Bin", 27, "nino", SUPPORT, ACTIVE);
-		Player *p6 = new Player("Ginetti", "Bin", 22, "water", IGL, ACTIVE);
-		Player *p7 = new Player("Ginetti", "Bin", 23, "rain", ENTRY, ACTIVE);
-		Player *p8 = new Player("Ginetti", "Bin", 28, "snow", LURKER, ACTIVE);
-		Player *p9 = new Player("Ginetti", "Bin", 22, "ice", LURKER, ACTIVE);
-		Player *p10 = new Player("Ginetti", "Bin", 27, "steam", SUPPORT,
-				ACTIVE);
+		// creazione di 10 player con smart pointers
+		std::shared_ptr<Player> p1(new Player("Albero", "Bosco", 22, "pino", ENTRY, ACTIVE));
+		std::shared_ptr<Player> p2(new Player("Tessuto", "Fibra", 19, "lino", IGL, ACTIVE));
+		std::shared_ptr<Player> p3(new Player("Ginotto", "Ottino", 24, "gino", LURKER, ACTIVE));
+		std::shared_ptr<Player> p4(new Player("Mattia", "Binotto", 23, "bino", SUPPORT, ACTIVE));
+		std::shared_ptr<Player> p5(new Player("Ninotto", "Gianciotto", 27, "nino", SUPPORT, ACTIVE));
+		std::shared_ptr<Player> p6(new Player("Acqua", "Bin", 22, "water", IGL, ACTIVE));
+		std::shared_ptr<Player> p7(new Player("Acqua", "Dal Cielo", 23, "rain", ENTRY, ACTIVE));
+		std::shared_ptr<Player> p8(new Player("Passo", "DelTonale", 28, "snow", LURKER, ACTIVE));
+		std::shared_ptr<Player> p9(new Player("Adamello", "Brescia", 22, "ice", LURKER, ACTIVE));
+		std::shared_ptr<Player> p10(new Player("Vapore", "Acqueo", 27, "steam", SUPPORT, ACTIVE));
 
-		Coach *c1 = new Coach("Capo", "Capi", 33, "capituu");
-		Coach *c2 = new Coach("Suini", "Gini", 29, "saigino");
+		// creazione di 2 coach con smart pointers
+		std::shared_ptr<Coach> c1(new Coach("Capo", "Capi", 33, "capituu"));
+		std::shared_ptr<Coach> c2(new Coach("Suini", "Gini", 29, "saigino"));
 
-		Organization *org = new Organization("G2", &organizations);
-		Organization *org2 = new Organization("Liquid", &organizations);
+		// creazione di 2 organizzazioni con smart pointers
+		std::shared_ptr<Organization> org(new Organization("G2", &organizations));
+		std::shared_ptr<Organization> org2(new Organization("Liquid", &organizations));
 
+		// assegnazione del coach c1 all'organizzazione "G2"
 		org->setCoach(c1);
+
+		// assegnazione del coach c2 all'organizzazione "Liquid"
 		org2->setCoach(c2);
 
+		// aggiunta dei player p1-p2-p3-p4-p5 all'organizzazione G2
 		org->addPlayer(p1);
 		org->addPlayer(p2);
 		org->addPlayer(p3);
 		org->addPlayer(p4);
 		org->addPlayer(p5);
+
+		// aggiunta dei player p1-p2-p3-p4-p5 all'organizzazione Liquid
 		org2->addPlayer(p6);
 		org2->addPlayer(p7);
 		org2->addPlayer(p8);
 		org2->addPlayer(p9);
 		org2->addPlayer(p10);
 
-		std::cout << p1->getTeam() << std::endl;
-
-		// MatchManager::newMatch(
-		// 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json",
-		// 		&organizations);
-		// MatchManager::newMatch(
-		// 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json",
-		// 		&organizations);
-		// MatchManager::newMatch(
-		// 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json",
-		// 		&organizations);
-
-		MatchManager::newMatch("./test.json", &organizations);
-		MatchManager::newMatch("./test2.json", &organizations);
-		MatchManager::newMatch("./test3.json", &organizations);
 
 
+		// caricamento di 3 match
+		 MatchManager::newMatch(
+		 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json",
+		 		&organizations);
+		 MatchManager::newMatch(
+		 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json",
+		 		&organizations);
+		 MatchManager::newMatch(
+		 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json",
+		 		&organizations);
+
+		 // stampa player 1
+		 std::cout << p1->toString() << std::endl;
+
+		 org->print();
+		 org2->print();
+
+		 Organization org_copy(*org, &organizations);
+		 org_copy.removeCoach();
+		 org_copy.print();
+
+		 // il campo "team" del coach ha valore ""
+		 // i player non vengono duplicati intenzionalmente
+		 // il vettore invece è duplicato e non è un semplice riferimento, quindi il vettore
+		 // dei player dell'organizzazione originale rimane invariato
+
+		 org->print();
+
+		 printOrganizations(&organizations);
+		 // viene stampato 2 volte G2 perché è stato duplicato
+
+		 std::shared_ptr<Retired> r1(new Retired(p5));
+		 r1->printStats();
+
+		 std::cout << (*p1 > *p2) << std::endl;
+		 std::cout << (*c1 > *c2) << std::endl;
 
 
-//		p1->printMatches();
-//		p6->printMatches();
-//
-//		p1->printStats();
-//		p6->printStats();
-//
-//		std::cout << c1->toString() << std::endl;
-//		std::cout << c2->toString() << std::endl;
-//
-//		org->print();
-//
-//		org2->print();
-//
-//		std::cout << "Best Player" << std::endl;
-//		std::cout << org->getBestPlayer()->toString() << std::endl;
 
 	} catch (std::exception &e) {
 		std::cout << "EXCEPTION: " << e.what() << std::endl;

@@ -9,11 +9,11 @@
 #include <sstream>
 #include "retired.hpp"
 
-Retired::Retired(Player* pl) : Person(pl->getName(), pl->getSurname(), pl->getAge()),Player(pl->getName(), pl->getSurname(), pl->getAge(), pl->getNickname(), pl->getRole(), pl->getStatus(), pl->getPlayerMatches()), Coach(pl->getName(), pl->getSurname(), pl->getAge(), pl->getNickname()){
+Retired::Retired(std::shared_ptr<Player> pl) : Person(pl->getName(), pl->getSurname(), pl->getAge()),Player(pl->getName(), pl->getSurname(), pl->getAge(), pl->getNickname(), pl->getRole(), pl->getStatus(), pl->getPlayerMatches()), Coach(pl->getName(), pl->getSurname(), pl->getAge(), pl->getNickname()){
 	isRetiredPlayer = true;
 }
 
-Retired::Retired(Coach* c) : Person(c->getName(), c->getSurname(), c->getAge()), Player(c->getName(), c->getSurname(), c->getAge(), c->getNickname(), NONE, RETIRED), Coach(c->getName(), c->getSurname(), c->getAge(), c->getNickname(), c->getCoachMatches()){
+Retired::Retired(std::shared_ptr<Coach> c) : Person(c->getName(), c->getSurname(), c->getAge()), Player(c->getName(), c->getSurname(), c->getAge(), c->getNickname(), NONE, RETIRED), Coach(c->getName(), c->getSurname(), c->getAge(), c->getNickname(), c->getCoachMatches()){
 	isRetiredPlayer = false;
 }
 

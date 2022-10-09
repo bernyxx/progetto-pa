@@ -24,6 +24,9 @@ public:
 	// costruttore che richiede inoltre anche una lista di partite
 	Coach(std::string, std::string, int, std::string, std::vector<double>*);
 
+
+	Coach(const Coach&);
+
 	// distruttore
 	virtual ~Coach();
 

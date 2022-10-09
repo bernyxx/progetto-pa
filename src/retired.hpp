@@ -8,6 +8,7 @@
 #ifndef RETIRED_HPP_
 #define RETIRED_HPP_
 
+#include <memory>
 #include "player.hpp"
 #include "coach.hpp"
 
@@ -19,10 +20,10 @@ private:
 
 public:
 	// costruttore dato un player
-	Retired(Player*);
+	Retired(std::shared_ptr<Player>);
 
 	// costruttore dato un coach
-	Retired(Coach*);
+	Retired(std::shared_ptr<Coach>);
 
 	// distruttore
 	~Retired();

@@ -17,7 +17,7 @@ class MatchManager {
 public:
 
 	// restituisce un puntatore ad un player dato l'insieme di organizzazioni (team) e il nickname del giocatore
-	static Player* findPlayer(std::vector<Organization*> *db,
+	static std::shared_ptr<Player> findPlayer(std::vector<Organization*> *db,
 			std::string nickname) {
 
 //		for (std::vector<Organization*>::iterator i = db->begin();
@@ -40,7 +40,7 @@ public:
 
 
 	// restituisce un puntatore ad un coach dato l'insieme di organizzazioni (team) e il nickname del coach
-	static Coach* findCoach(std::vector<Organization*> *db, std::string nickname) {
+	static std::shared_ptr<Coach> findCoach(std::vector<Organization*> *db, std::string nickname) {
 
 //		for (std::vector<Organization*>::iterator i = db->begin();
 //				i != db->end(); ++i) {
@@ -65,7 +65,7 @@ public:
 	}
 
 	// controlla se il player fa parte della squadra
-	static void checkPlayer(Player *pl, std::string team) {
+	static void checkPlayer(std::shared_ptr<Player> pl, std::string team) {
 		if (pl->getTeam() == team) {
 			return;
 		}
@@ -76,7 +76,7 @@ public:
 
 
 	// controlla se il coach fa parte della squadra
-	static void checkCoach(Coach *c, std::string team) {
+	static void checkCoach(std::shared_ptr<Coach> c, std::string team) {
 		if ((c->getTeam() == team)) {
 			return;
 		}
@@ -105,7 +105,7 @@ public:
 
 		for (int i = 0; i < numPlayersPerTeam; i++) {
 				std::string nickname = data[key][i]["player"];
-				Player *pl = findPlayer(db, nickname);
+				std::shared_ptr<Player> pl = findPlayer(db, nickname);
 
 				// effettua un controllo aggiuntivo per verificare che il giocatore sia effettivamente membro della squadra
 				checkPlayer(pl, team);
@@ -170,12 +170,12 @@ public:
 		// aggiungi la partita ai 2 coach
 
 		// coach team 1
-		Coach *c1 = findCoach(db, coach1);
+		std::shared_ptr<Coach> c1 = findCoach(db, coach1);
 		checkCoach(c1, team1);
 		c1->addMatch(kd1);
 
 		// coach team 2
-		Coach *c2 = findCoach(db, coach2);
+		std::shared_ptr<Coach> c2 = findCoach(db, coach2);
 		checkCoach(c2, team2);
 		c2->addMatch(kd2);
 

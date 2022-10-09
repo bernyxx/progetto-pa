@@ -3,6 +3,8 @@
 #include <algorithm>
 #include "organization.hpp"
 
+
+
 Organization::Organization(std::string name, std::vector<Organization*> *db){
 	this->name = name;
 	this->coach = NULL;
@@ -16,10 +18,11 @@ Organization::~Organization(){
 }
 
 Organization::Organization(Organization& old, std::vector<Organization*> *db){
+	std::cout << "COPYYYY" << std::endl;
 	name = old.name;
 	coach = old.coach;
 
-	std::for_each(old.getPlayers()->begin(), old.getPlayers()->end(), [this](Player* pl){this->players.push_back(pl);});
+	std::for_each(old.getPlayers()->begin(), old.getPlayers()->end(), [this](std::shared_ptr<Player> pl){this->players.push_back(pl);});
 
 	db->push_back(this);
 }
@@ -37,7 +40,7 @@ void Organization::print(){
 
 	if(players.size() > 0){
 		// print player list
-		for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+		for (std::vector<std::shared_ptr<Player>>::iterator i = players.begin(); i != players.end(); ++i) {
 			std::cout << (*i)->toString() << std::endl;
 		}
 
@@ -62,11 +65,11 @@ void Organization::print(){
 }
 
 // coach methods
-Coach* Organization::getCoach(){
+std::shared_ptr<Coach> Organization::getCoach(){
 	return coach;
 }
 
-void Organization::setCoach(Coach* c){
+void Organization::setCoach(std::shared_ptr<Coach> c){
 	if(c->hasTeam()){
 		throw std::runtime_error("Can't add a coach who is still a part of another team!");
 		return;
@@ -86,7 +89,7 @@ bool Organization::hasCoach(){
 
 
 // players methods+
-void Organization::addPlayer(Player* pl){
+void Organization::addPlayer(std::shared_ptr<Player> pl){
 	if(pl->hasTeam()){
 		throw "Can't add a player who is still a part of another team!";
 		return;
@@ -122,7 +125,7 @@ void Organization::removePlayer(std::string nn) {
 
 	// riscrittura con algoritmi STL
 
-	std::vector<Player*>::iterator it = std::find_if(players.begin(),players.end(), [nn](Player *pl) {return pl->getNickname() == nn;});
+	std::vector<std::shared_ptr<Player>>::iterator it = std::find_if(players.begin(),players.end(), [nn](std::shared_ptr<Player> pl) {return pl->getNickname() == nn;});
 
 	if(it != players.end()){
 		int index = std::distance(players.begin(), it);
@@ -138,7 +141,7 @@ void Organization::removePlayer(std::string nn) {
 
 }
 
-Player* Organization::getPlayer(std::string nn) {
+std::shared_ptr<Player> Organization::getPlayer(std::string nn) {
 
 //	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
 //
@@ -148,7 +151,7 @@ Player* Organization::getPlayer(std::string nn) {
 //	}
 
 	// riscrittura con algoritmi STL
-	std::vector<Player*>::iterator it = std::find_if(players.begin(),players.end(), [nn](Player *pl) {return pl->getNickname() == nn;});
+	std::vector<std::shared_ptr<Player>>::iterator it = std::find_if(players.begin(),players.end(), [nn](std::shared_ptr<Player> pl) {return pl->getNickname() == nn;});
 
 	if (it != players.end()) {
 			return *it;
@@ -158,13 +161,13 @@ Player* Organization::getPlayer(std::string nn) {
 	throw "Player don't found!";
 }
 
-Player* Organization::getBestPlayer(){
+std::shared_ptr<Player> Organization::getBestPlayer(){
 
 	double maxAvgKD = 0;
 	int maxIndex = 0;
 	int index = 0;
 
-	for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i) {
+	for (std::vector<std::shared_ptr<Player>>::iterator i = players.begin(); i != players.end(); ++i) {
 
 		if((*i)->getAvgKD() > maxAvgKD){
 			maxAvgKD = (*i)->getAvgKD();
@@ -187,7 +190,7 @@ bool Organization::hasPlayer(std::string nn) {
 //	}
 
 	// riscrittura con algoritmi STL
-	std::vector<Player*>::iterator it = std::find_if(players.begin(),players.end(), [nn](Player *pl) {return pl->getNickname() == nn;});
+	std::vector<std::shared_ptr<Player>>::iterator it = std::find_if(players.begin(),players.end(), [nn](std::shared_ptr<Player> pl) {return pl->getNickname() == nn;});
 
 	if (it != players.end()) {
 		return true;
@@ -196,6 +199,6 @@ bool Organization::hasPlayer(std::string nn) {
 	return false;
 }
 
-std::vector<Player*>* Organization::getPlayers(){
+std::vector<std::shared_ptr<Player>>* Organization::getPlayers(){
 	return &players;
 }
