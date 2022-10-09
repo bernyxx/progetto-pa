@@ -1,10 +1,3 @@
-/*
- * customRound.cpp
- *
- *  Created on: 6 ott 2022
- *      Author: Kevin
- */
-
 #include <cmath>
 #include "customRound.hpp"
 

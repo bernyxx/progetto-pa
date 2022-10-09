@@ -14,13 +14,20 @@
 class Person
 {
 private:
+	 // nome
      std::string name;
+     // cognome
      std::string surname;
+     // età
      int age;
 
 public:
+     // costruttore che richiede nome, cognome, età
     Person(std::string, std::string, int);
+
+    // distruttore
     virtual ~Person();
+
     virtual std::string toString();
     std::string getName();
     std::string getSurname();

@@ -1,11 +1,3 @@
-//============================================================================
-// Name        : progetto_pa_csgo.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -61,7 +53,7 @@ int main() {
 		org2->addPlayer(p9);
 		org2->addPlayer(p10);
 
-//		std::cout << p1->getTeam() << std::endl;
+		std::cout << p1->getTeam() << std::endl;
 
 		MatchManager::newMatch(
 				"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json",
@@ -77,57 +69,8 @@ int main() {
 //		MatchManager::newMatch("./test2.json", &organizations);
 //		MatchManager::newMatch("./test3.json", &organizations);
 
-//		Retired *r1 = new Retired(p1);
-//		std::cout << r1->getTeam() << std::endl;
-//		std::cout << r1->getRole() << std::endl;
-		//		r1->addMatch();
-		//		r1->changeRole(LURKER);
-		//		r1->changeStatus(ACTIVE);
-//		std::cout << r1->getAge() << std::endl;
-//		std::cout << r1->getAvgAssists() << std::endl;
-//		std::cout << r1->getAvgDeaths() << std::endl;
-//		std::cout << r1->getAvgKD() << std::endl;
-//		std::cout << r1->getRating() << std::endl;
-//		std::cout << r1->getAvgKills() << std::endl;
-//		std::cout << r1->getName() << std::endl;
-//		std::cout << r1->getNickname() << std::endl;
-//		std::cout << r1->getRole() << std::endl;
-//		std::cout << r1->getStatus() << std::endl;
-//		std::cout << r1->getSurname() << std::endl;
-//		std::cout << r1->getTeam() << std::endl;
-//		std::cout << r1->getTotalAssists() << std::endl;
-//		std::cout << r1->getTotalDeaths() << std::endl;
-//		std::cout << r1->getTotalKD() << std::endl;
-//		std::cout << r1->getTotalKills() << std::endl;
-//		std::cout << r1->hasTeam() << std::endl;
-//
-//		Retired *rc = new Retired(p3);
-//		std::cout << (*r1 > *rc) << std::endl;
-//		std::cout << (*r1 < *rc) << std::endl;
-//
-//		r1->printMatches();
-//		r1->printStats();
-//			r1->setTeam("blue");
-
-//		std::cout << r1->toString() << std::endl;
-//		r1->unsetTeam();
-
-		//----------------------------------------------------------
-
-		Retired *r2 = new Retired(c1);
-		std::cout << r2->getTeam() << std::endl;//
-		std::cout << r2->getRole() << std::endl;//
 
 
-		Retired *rc2 = new Retired(c2);
-		std::cout << (*r2 > *rc2) << std::endl;//
-		std::cout << (*r2 < *rc2) << std::endl;//
-
-		r2->printMatches();
-//		r2->printStats();
-//		r2->setTeam("blue");
-		std::cout << r2->toString() << std::endl;
-//		r2->unsetTeam();
 
 //		p1->printMatches();
 //		p6->printMatches();

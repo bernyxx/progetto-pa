@@ -9,6 +9,8 @@
 #define PLAYERMATCH_HPP_
 
 class PlayerMatch{
+
+// classe che fa da contenitore per alcune statistiche di un giocatore in una partita
 private:
 	int kills;
 	int assists;
@@ -18,7 +20,11 @@ private:
 public:
 	PlayerMatch(int, int, int, double);
 	~PlayerMatch();
+
+	// restituisce un array con 3 valori nel seguente ordine: 0-> kills, 1-> assists, 2-> deaths
 	int* getValues();
+
+	// restituisce il rapporto uccisioni/morti
 	double getKD();
 };
 

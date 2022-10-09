@@ -1,13 +1,7 @@
-/*
- * customRound.hpp
- *
- *  Created on: 6 ott 2022
- *      Author: Kevin
- */
-
 #ifndef CUSTOMROUND_HPP_
 #define CUSTOMROUND_HPP_
 
+// arrotonda alla seconda cifra decimale
 double customRound(double value);
 
 

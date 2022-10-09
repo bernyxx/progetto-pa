@@ -11,25 +11,30 @@
 #include "player.hpp"
 #include "coach.hpp"
 
-union vect{
-	std::vector<double>* v1;
-	std::vector<PlayerMatch*>* v2;
-};
-
 class Retired : public Player, public Coach{
 private:
+	// true-> retired è stato costruito con un player
+	// false -> retired è stato costruito con un coach
 	bool isRetiredPlayer;
 
 public:
+	// costruttore dato un player
 	Retired(Player*);
+
+	// costruttore dato un coach
 	Retired(Coach*);
 
+	// distruttore
 	~Retired();
+
+
+	// sono sostanzialmente gli stessi metodi di player e coach
+	// con un comportamento diverso per rappresentare meglio una persona
+	// che ha smesso di competere
 
 	std::string toString();
 
 	std::string getNickname();
-
 
 	bool hasTeam();
 	std::string getTeam();

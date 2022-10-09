@@ -1,10 +1,3 @@
-/*
- * organization.cpp
- *
- *  Created on: 29 set 2022
- *      Author: Kevin
- */
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -13,6 +6,8 @@
 Organization::Organization(std::string name, std::vector<Organization*> *db){
 	this->name = name;
 	this->coach = NULL;
+
+	// aggiunge il nuovo oggetto alla lista di organizzazioni
 	db->push_back(this);
 }
 
@@ -116,6 +111,8 @@ void Organization::removePlayer(std::string nn) {
 //		return;
 //	}
 
+	// riscrittura con algoritmi STL
+
 	std::vector<Player*>::iterator it = std::find_if(players.begin(),players.end(), [nn](Player *pl) {return pl->getNickname() == nn;});
 
 	if(it != players.end()){
@@ -141,6 +138,7 @@ Player* Organization::getPlayer(std::string nn) {
 //		}
 //	}
 
+	// riscrittura con algoritmi STL
 	std::vector<Player*>::iterator it = std::find_if(players.begin(),players.end(), [nn](Player *pl) {return pl->getNickname() == nn;});
 
 	if (it != players.end()) {
@@ -179,7 +177,7 @@ bool Organization::hasPlayer(std::string nn) {
 //		}
 //	}
 
-
+	// riscrittura con algoritmi STL
 	std::vector<Player*>::iterator it = std::find_if(players.begin(),players.end(), [nn](Player *pl) {return pl->getNickname() == nn;});
 
 	if (it != players.end()) {

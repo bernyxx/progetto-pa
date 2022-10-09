@@ -57,10 +57,13 @@ bool Coach::operator<(Coach& c){
 std::string Coach::toString(){
 	std::stringstream ss;
 	if(team == ""){
+		// se non ha team
 		ss << "COACH | Nickname:" << nickname << " | NO TEAM";
 	} else if(matches.size() > 0){
+		// se ha match nel vettore matches
 		ss << "COACH | Nickname:" << nickname << " | Team:" << team << " | Rating:" << getRating();
 	}else{
+		// se NON ha matches
 		ss << "COACH | Nickname:" << nickname << " | Team:" << team;
 	}
 	return ss.str();
@@ -76,6 +79,7 @@ double Coach::getRating(){
 		total += kd;
 	}
 
+	// customRound serve per arrotondare alla seconda cifra decimale
 	return customRound(total / (double) matches.size());
 }
 
