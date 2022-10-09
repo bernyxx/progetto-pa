@@ -15,6 +15,15 @@ Organization::~Organization(){
 	std::cout << "Distr. Organization" << std::endl;
 }
 
+Organization::Organization(Organization& old, std::vector<Organization*> *db){
+	name = old.name;
+	coach = old.coach;
+
+	std::for_each(old.getPlayers()->begin(), old.getPlayers()->end(), [this](Player* pl){this->players.push_back(pl);});
+
+	db->push_back(this);
+}
+
 std::string Organization::getName(){
 	return name;
 }
@@ -187,9 +196,6 @@ bool Organization::hasPlayer(std::string nn) {
 	return false;
 }
 
-
-
-
-
-
-
+std::vector<Player*>* Organization::getPlayers(){
+	return &players;
+}

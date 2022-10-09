@@ -55,19 +55,19 @@ int main() {
 
 		std::cout << p1->getTeam() << std::endl;
 
-		MatchManager::newMatch(
-				"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json",
-				&organizations);
-		MatchManager::newMatch(
-				"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json",
-				&organizations);
-		MatchManager::newMatch(
-				"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json",
-				&organizations);
+		// MatchManager::newMatch(
+		// 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json",
+		// 		&organizations);
+		// MatchManager::newMatch(
+		// 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json",
+		// 		&organizations);
+		// MatchManager::newMatch(
+		// 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json",
+		// 		&organizations);
 
-//		MatchManager::newMatch("./test.json", &organizations);
-//		MatchManager::newMatch("./test2.json", &organizations);
-//		MatchManager::newMatch("./test3.json", &organizations);
+		MatchManager::newMatch("./test.json", &organizations);
+		MatchManager::newMatch("./test2.json", &organizations);
+		MatchManager::newMatch("./test3.json", &organizations);
 
 
 

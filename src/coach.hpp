@@ -11,7 +11,7 @@ private:
 	std::string nickname;
 
 	// nome della squadra (organizzazione) che allena
-	std::string team;\
+	std::string team;
 
 	// lista di partite in cui ha fatto da coach (indipendente dal team)
 	std::vector<double> matches;
@@ -35,7 +35,7 @@ public:
 	// METODI TEAM
 
 	// ritorna true se il coach fa parte di una squadra
-	// ritorna false se è un free agent
+	// ritorna false se ï¿½ un free agent
 	virtual bool hasTeam();
 
 	virtual std::string getTeam();
@@ -45,7 +45,7 @@ public:
 	// OPERATOR OVERLOAD
 
 	// Overload degli operatori per comparare due coach
-	// L'ordine è stabilito sulla statistica "rating" (vedi getRating)
+	// L'ordine ï¿½ stabilito sulla statistica "rating" (vedi getRating)
 	virtual bool operator>(Coach&);
 	virtual bool operator<(Coach&);
 
@@ -58,7 +58,7 @@ public:
 	// restituisce il rating del coach calcolato facendo la media dei rating delle partite
 	virtual double getRating();
 
-	// restituisce il vettore matches (utile soprattutto per l'ereditarietà)
+	// restituisce il vettore matches (utile soprattutto per l'ereditarietï¿½)
 	virtual std::vector<double>* getCoachMatches();
 
 };

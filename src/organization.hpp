@@ -18,11 +18,15 @@ private:
 
 public:
 	// costruttore
-	// richiede nome del team e la lista di organizzazioni dove verrà inserita la squadra
+	// richiede nome del team e la lista di organizzazioni dove verrï¿½ inserita la squadra
 	Organization(std::string, std::vector<Organization*>*);
 
 	// distruttore
 	~Organization();
+
+	// copy constructor, crea un nuovo vettore dove trasferisce manualmente i puntatori dei vecchi player
+	// non crea semplicemente un puntatore al vecchio vettore
+	Organization (Organization&, std::vector<Organization*>*);
 
 	std::string getName();
 
@@ -47,12 +51,15 @@ public:
 	// restituisce un puntatore ad un giocatore dato il nickname
 	Player* getPlayer(std::string);
 
-	// restituisce un puntatore al miglior giocatore della squadra -> il giocatore con la più alta media del rapporto KD per partita (vedi getAvgKD in Player)
+	// restituisce un puntatore al miglior giocatore della squadra -> il giocatore con la piï¿½ alta media del rapporto KD per partita (vedi getAvgKD in Player)
 	Player* getBestPlayer();
 
 	// restituisce true se la squadra ha il giocatore con nickname passato come argomento
 	// altrimenti restituisce false
 	bool hasPlayer(std::string);
+
+	// restituisce un puntatore al vettore dei puntatori dei giocatori della squadra
+	std::vector<Player*>* getPlayers();
 
 };
 

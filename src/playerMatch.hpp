@@ -1,10 +1,3 @@
-/*
- * Match.hpp
- *
- *  Created on: 2 ott 2022
- *      Author: Kevin
- */
-
 #ifndef PLAYERMATCH_HPP_
 #define PLAYERMATCH_HPP_
 
