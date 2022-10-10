@@ -14,6 +14,7 @@ occu list = map (\l -> (length l, head l)) (group (sort list))
 
 main :: IO ()
 main = do
+  print "Inserisci l'indirizzo web: "
   url <- getLine
   text <- formatText url
   print text
