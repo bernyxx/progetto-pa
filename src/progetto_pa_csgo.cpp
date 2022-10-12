@@ -69,14 +69,24 @@ int main() {
 
 
 		// caricamento di 3 match
-		 MatchManager::newMatch(
-		 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json",
+		//  MatchManager::newMatch(
+		//  		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test.json",
+		//  		&organizations);
+		//  MatchManager::newMatch(
+		//  		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json",
+		//  		&organizations);
+		//  MatchManager::newMatch(
+		//  		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json",
+		//  		&organizations);
+
+		MatchManager::newMatch(
+		 		"./test.json",
 		 		&organizations);
 		 MatchManager::newMatch(
-		 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test2.json",
+		 		"./test2.json",
 		 		&organizations);
 		 MatchManager::newMatch(
-		 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/test3.json",
+		 		"./test3.json",
 		 		&organizations);
 
 		 // stampa player 1
@@ -91,13 +101,13 @@ int main() {
 
 		 // il campo "team" del coach ha valore ""
 		 // i player non vengono duplicati intenzionalmente
-		 // il vettore invece è duplicato e non è un semplice riferimento, quindi il vettore
+		 // il vettore invece ï¿½ duplicato e non ï¿½ un semplice riferimento, quindi il vettore
 		 // dei player dell'organizzazione originale rimane invariato
 
 		 org->print();
 
 		 printOrganizations(&organizations);
-		 // viene stampato 2 volte G2 perché è stato duplicato
+		 // viene stampato 2 volte G2 perchï¿½ ï¿½ stato duplicato
 
 		 std::shared_ptr<Retired> r1(new Retired(p5));
 		 r1->printStats();

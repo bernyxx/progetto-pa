@@ -17,7 +17,7 @@ CSGO è videogioco competitivo online a squadre di 5 giocatori. Ogni partita si 
 Ogni partita si divide in 2 tempi da 15 round ciascuno della durata di 1 minuto e 55 secondi.
 La squadra che vince un round guadagna 1 punto e la prima che arriva a 16 round vinti si aggiudica la vittoria (alla meglio di 30). Se una squadra vince ogni round del primo tempo (15-0) e il primo round del secondo tempo (16-0) la partita termina. Se entrambe le squadre arrivano a 15 punti (punteggio 15 a 15), si procede ad oltranza con i round supplementari.
 All'inizio della partita una squadra ha il ruolo di terrorista (\textbf{T}) mentre l'altra di anti-terrorista (\textbf{CT}). I ruoli assunti dalle squadre rimangono fissi per l'intero tempo. Prima del round 16, prima dell'inizio del secondo tempo, i ruoli vengono invertiti.
-Ogni squadra per vincere un round ed aggiudicarsi un punto deve:
+La vittoria di ogni round e la conseguente assegnazione del punto avviene in questo modo:
 \begin{itemize}
 \item La squadra T può vincere il round facendo esplodere una bomba che deve essere piazzata o eliminando gli avversari entro lo scadere del tempo. La bomba può essere piazzata una sola volta per round;
 
@@ -56,18 +56,33 @@ Il programma è composto dalle seguenti classi:
 \item playerMatch (rappresenta un contenitore con le statistiche di un giocatore in una partita)
 \end{itemize}
 
-La relazione tra le classi è rappresentata nel seguente diagramma UML:
+Le classi, i campi e metodi e le relazioni tra classi sono rappresentate nel seguente diagramma UML:
 
 \begin{center}
 \includegraphics[height=\textheight]{uml}
 \end{center}
 
-Il funzionamento dettagliato di ogni classe, funzione, metodo è spiegata all'interno del codice.
+Il funzionamento dettagliato di ogni classe, funzione e metodo è spiegata all'interno del codice.
 
 \section{Progetto Haskell}
 \subsection{Introduzione}
 Il progetto in Haskell consiste in un programma che conta le occorrenze delle parole in una pagina web passata come argomento appena dopo aver avviato il programma.
 Per realizzare il progetto sono state utilizzate le librerie \textit{"Scalpel"} uno web scraper per estrarre testo dalle pagine web e \textit{"split"} per utilizzare metodi aggiuntivi di manipolazione delle liste come \textit{splitOn()} che consente di dividere una stringa in una lista di sottostringhe per separare le parole contenute nelle frasi.
+
+\subsection{Funzionamento del programma}
+Per contare le parole contenute nella pagina web passata in input il programma esegue i seguenti passi:
+\begin{enumerate}
+\item ottieni l'URL della pagina su cui far funzionare lo scraper;
+\item effettua lo scraping della pagina ed estrai il testo contenuto nei tag \textit{p}, il risultato di questa operazione è una lista di stringhe, una stringa per ogni tag \textit{p};
+\item fondi le diverse stringhe in un'unica stringa;
+\item spezza l'unica stringa per creare una lista di parole;
+\item conta le occorrenze e ordinale andando a creare una lista di tuple di arità 2:
+
+\textit{esempio: [(3, "studente"), (2, "informatica"), (2, "ingegneria")];}
+\item stampa il risultato.
+
+\end{enumerate}
+
 
 
 
