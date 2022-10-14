@@ -1,10 +1,3 @@
-/*
- * person.hpp
- *
- *  Created on: 28 set 2022
- *      Author: Kevin
- */
-
 #ifndef PERSON_HPP_
 #define PERSON_HPP_
 

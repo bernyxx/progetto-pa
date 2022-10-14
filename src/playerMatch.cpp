@@ -1,10 +1,3 @@
-/*
- * PlayerMatch.cpp
- *
- *  Created on: 2 ott 2022
- *      Author: Kevin
- */
-
 #include "playerMatch.hpp"
 
 #include <iostream>

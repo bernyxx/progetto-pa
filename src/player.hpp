@@ -1,10 +1,3 @@
-/*
- * player.hpp
- *
- *  Created on: 28 set 2022
- *      Author: Kevin
- */
-
 #ifndef PLAYER_HPP_
 #define PLAYER_HPP_
 

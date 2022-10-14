@@ -1,10 +1,3 @@
-/*
- * retired.hpp
- *
- *  Created on: 8 ott 2022
- *      Author: Kevin
- */
-
 #ifndef RETIRED_HPP_
 #define RETIRED_HPP_
 

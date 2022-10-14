@@ -29,12 +29,16 @@ public:
 //		}
 
 		// riscritto con algortimo STL
+
+		// trova tra tutte le organizzazioni quella che contiene il player con il nickname passato come parametro al metodo
 		std::vector<Organization*>::iterator it = std::find_if(db->begin(),db->end(), [nickname](Organization *org) {return org->hasPlayer(nickname);});
 
+		// se esiste un'organizzazione con il player, ritorna un puntatore al player
 		if (it != db->end()) {
 			return (*it)->getPlayer(nickname);
 		}
 
+		// se il giocatore non è stato trovato, lancia un'eccezione
 		throw std::runtime_error("Player not found!");
 	}
 
@@ -54,13 +58,15 @@ public:
 //		}
 
 		// riscritto con algortimo STL
+		// trova tra tutte le organizzazioni quella che contiene il coach con il nickname passato come parametro al metodo
 		std::vector<Organization*>::iterator it = std::find_if(db->begin(), db->end(), [nickname](Organization* org){if(org->hasCoach()){return org->getCoach()->getNickname() == nickname;} else {return false;}});
 
+		// se esiste un'organizzazione con il coach, ritorna un puntatore al coach
 		if(it != db->end()){
 			return (*it)->getCoach();
 		}
 
-
+		// se il coach non è stato trovato, lancia un'eccezione
 		throw std::runtime_error("Coach not found!");
 	}
 
@@ -70,6 +76,7 @@ public:
 			return;
 		}
 
+		// se il controllo è negativo lancia un'eccezione
 		throw std::runtime_error(
 				"Player is not part of the team specified in the JSON file!");
 	}
@@ -81,6 +88,7 @@ public:
 			return;
 		}
 
+		// se il controllo è negativo lancia un'eccezione
 		throw std::runtime_error(
 				"Player is not part of the team specified in the JSON file!");
 	}
@@ -110,12 +118,15 @@ public:
 				// effettua un controllo aggiuntivo per verificare che il giocatore sia effettivamente membro della squadra
 				checkPlayer(pl, team);
 
+				// estrai i dati su kills, assists e deaths dal file json
 				int kills = data[key][i]["kills"];
 				int assists = data[key][i]["assists"];
 				int deaths = data[key][i]["deaths"];
 
+				// calcola il rapporto k/d
 				double kd = customRound(kills / (double) deaths);
 
+				// crea un nuovo oggetto playermatch
 				PlayerMatch *pm = new PlayerMatch(kills, assists, deaths, kd);
 				pl->addMatch(pm);
 				sumKD += kd;

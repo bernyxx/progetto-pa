@@ -3,6 +3,8 @@
 {-# HLINT ignore "Use camelCase" #-}
 
 import Control.Applicative
+import Control.Exception
+import Data.Either (fromRight)
 import Data.List
 import Data.List.Split
 import Data.Maybe
@@ -26,10 +28,10 @@ main = do
 formatText :: [Char] -> IO [(Int, [Char])]
 formatText url = do
   -- ottieni il testo contenuto nei tag <p> della pagina
-  wiki <- scrape_titles url
-  
+  dataFromPage <- scrape_titles url
+
   -- da Maybe[String] a [String]
-  let text = fromJust wiki
+  let text = fromJust dataFromPage
 
   -- a partire da una lista di stringhe fondo tutto in un unico test
   -- [String] -> [Char]

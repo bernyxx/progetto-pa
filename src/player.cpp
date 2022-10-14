@@ -1,10 +1,3 @@
-/*
- * player.cpp
- *
- *  Created on: 28 set 2022
- *      Author: Kevin
- */
-
 #include <iostream>
 #include <sstream>
 #include <algorithm>
@@ -31,6 +24,12 @@ Player::Player(std::string name, std::string surname, int age, std::string nickn
 
 Player::~Player(){
 	std::cout << "Distr. Player" << std::endl;
+
+	// distruggi ogni playermatch contenuto in matches
+	std::for_each(matches.begin(), matches.end(), [](PlayerMatch *pm){
+			delete pm;
+	});
+
 }
 
 PlayerRole Player::getRole(){
@@ -69,23 +68,32 @@ void Player::unsetTeam(){
 	team = "";
 }
 
+// operator overload >
 bool Player::operator> (Player& pl){
 
 	if(getAvgKD() > pl.getAvgKD()) return true;
 	else return false;
 }
 
+// operator overload <
 bool Player::operator< (Player& pl){
 	return !Player::operator >(pl);
 }
 
 std::string Player::toString(){
 	std::stringstream ss;
-	if(team == ""){
+
+	if (team == "" && matches.size() > 0) {
+		// se il giocatore non fa parte di un team ma ha giocato almeno una partita
+		ss << "PLAYER | Nickname:" << nickname << " | NO TEAM | Rating: " << getAvgKD();
+	} else if (team == "" && matches.size() == 0) {
+		// se il giocatore non fa parte di un team e non ha mai giocato partite
 		ss << "PLAYER | Nickname:" << nickname << " | NO TEAM";
-	} else if(matches.size() > 0){
+	} else if (team != "" && matches.size() > 0) {
+		// se il giocatore fa parte di un team e ha giocato almeno una partita
 		ss << "PLAYER | Nickname:" << nickname << " | Team:" << team << " | Rating: " << getAvgKD();
 	} else {
+		// se il giocatore fa parte di un team ma non ha giocato partite
 		ss << "PLAYER | Nickname:" << nickname << " | Team:" << team;
 	}
 
@@ -103,6 +111,7 @@ void Player::printMatches(){
 //		std::cout << "MATCH | Kills:" << results[0] << " | Assists:" << results[1] << " | Deaths:" << results[2] << std::endl;
 //	}
 
+	// per ogni match presente nel vettore, stampa le statistiche del giocatore
 	std::for_each(matches.begin(), matches.end(), [](PlayerMatch *pm){
 		int* results = pm->getValues();
 		std::cout << "MATCH | Kills:" << results[0] << " | Assists:" << results[1] << " | Deaths:" << results[2] << std::endl;

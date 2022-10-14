@@ -1,10 +1,3 @@
-/*
- * person.cpp
- *
- *  Created on: 28 set 2022
- *      Author: Kevin
- */
-
 #include "person.hpp"
 #include <iostream>
 #include <sstream>

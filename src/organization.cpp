@@ -18,10 +18,10 @@ Organization::~Organization(){
 }
 
 Organization::Organization(Organization& old, std::vector<Organization*> *db){
-	std::cout << "COPYYYY" << std::endl;
 	name = old.name;
 	coach = old.coach;
 
+	// crea un nuovo vettore che contiene tutti i puntatori della vecchia organization
 	std::for_each(old.getPlayers()->begin(), old.getPlayers()->end(), [this](std::shared_ptr<Player> pl){this->players.push_back(pl);});
 
 	db->push_back(this);
@@ -38,12 +38,14 @@ void Organization::print(){
 	std::cout << std::endl;
 	std::cout << "Players" << std::endl;
 
+	// se l'organizzazione contiene giocatori
 	if(players.size() > 0){
-		// print player list
+		// stampa lista giocatori
 		for (std::vector<std::shared_ptr<Player>>::iterator i = players.begin(); i != players.end(); ++i) {
 			std::cout << (*i)->toString() << std::endl;
 		}
 
+	// se non ci sono giocatori
 	} else {
 		std::cout << "NO PLAYERS" << std::endl;
 	}
@@ -52,10 +54,12 @@ void Organization::print(){
 	std::cout << std::endl;
 	std::cout << "Coach" << std::endl;
 
+	// se l'org. ha un coach
 	if (coach != NULL) {
 
 		std::cout << coach->toString() << std::endl;
 
+	// se l'org NON ha il coach
 	} else {
 		std::cout << "NO COACH" << std::endl;
 	}
@@ -70,6 +74,7 @@ std::shared_ptr<Coach> Organization::getCoach(){
 }
 
 void Organization::setCoach(std::shared_ptr<Coach> c){
+	// se il coach fa già parte di un altro team, lancia un'eccezione
 	if(c->hasTeam()){
 		throw std::runtime_error("Can't add a coach who is still a part of another team!");
 		return;
@@ -79,7 +84,10 @@ void Organization::setCoach(std::shared_ptr<Coach> c){
 }
 
 void Organization::removeCoach(){
+	// bisogna prima rimuovere il nome del team dal campo del coach
 	coach->unsetTeam();
+
+	// poi si rimuove il puntatore al coach dall'organization
 	coach = NULL;
 }
 
@@ -88,8 +96,9 @@ bool Organization::hasCoach(){
 }
 
 
-// players methods+
+// players methods
 void Organization::addPlayer(std::shared_ptr<Player> pl){
+	// se il player fa già parte di un altro team, lancia un'eccezione
 	if(pl->hasTeam()){
 		throw "Can't add a player who is still a part of another team!";
 		return;
@@ -123,10 +132,12 @@ void Organization::removePlayer(std::string nn) {
 //		return;
 //	}
 
-	// riscrittura con algoritmi STL
+	// riscrittura con algoritmo STL
 
+	// trova prima il puntatore al giocatore che possiede il nickname passato come parametro al metodo
 	std::vector<std::shared_ptr<Player>>::iterator it = std::find_if(players.begin(),players.end(), [nn](std::shared_ptr<Player> pl) {return pl->getNickname() == nn;});
 
+	// se il player esiste, rimuovilo dal vettore
 	if(it != players.end()){
 		int index = std::distance(players.begin(), it);
 		players.at(index)->unsetTeam();
@@ -135,7 +146,7 @@ void Organization::removePlayer(std::string nn) {
 		return;
 	}
 
-
+	// se il player non è stato trovato, lancia un'eccezione
 	throw std::runtime_error("Player to remove don't found!") ;
 
 
@@ -151,8 +162,10 @@ std::shared_ptr<Player> Organization::getPlayer(std::string nn) {
 //	}
 
 	// riscrittura con algoritmi STL
+	// trova il puntatore al giocatore che possiede il nickname passato come parametro al metodo
 	std::vector<std::shared_ptr<Player>>::iterator it = std::find_if(players.begin(),players.end(), [nn](std::shared_ptr<Player> pl) {return pl->getNickname() == nn;});
 
+	// se il player esiste, restituisci il puntatore (smart pointer)
 	if (it != players.end()) {
 			return *it;
 	}
@@ -167,6 +180,7 @@ std::shared_ptr<Player> Organization::getBestPlayer(){
 	int maxIndex = 0;
 	int index = 0;
 
+	// trova il giocatore con il massimo AvgKD
 	for (std::vector<std::shared_ptr<Player>>::iterator i = players.begin(); i != players.end(); ++i) {
 
 		if((*i)->getAvgKD() > maxAvgKD){
@@ -177,6 +191,7 @@ std::shared_ptr<Player> Organization::getBestPlayer(){
 		index++;
 	}
 
+	// restituiscilo
 	return players.at(maxIndex);
 }
 
@@ -190,8 +205,10 @@ bool Organization::hasPlayer(std::string nn) {
 //	}
 
 	// riscrittura con algoritmi STL
+	// trova il puntatore al giocatore che possiede il nickname passato come parametro al metodo
 	std::vector<std::shared_ptr<Player>>::iterator it = std::find_if(players.begin(),players.end(), [nn](std::shared_ptr<Player> pl) {return pl->getNickname() == nn;});
 
+	// se esiste, restituisci true, altrimenti restituisci false
 	if (it != players.end()) {
 		return true;
 	}
