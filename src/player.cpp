@@ -26,9 +26,10 @@ Player::~Player(){
 	std::cout << "Distr. Player" << std::endl;
 
 	// distruggi ogni playermatch contenuto in matches
-	std::for_each(matches.begin(), matches.end(), [](PlayerMatch *pm){
-			delete pm;
-	});
+	// std::for_each(matches.begin(), matches.end(), [](PlayerMatch *pm){
+	// 		delete pm;
+	// 		pm = 0;
+	// });
 
 }
 

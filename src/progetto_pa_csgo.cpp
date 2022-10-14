@@ -87,26 +87,26 @@ int main() {
 
 		// caricamento da windows con path assoluto
 		// caricamento di 3 match
-		MatchManager::newMatch(
-				"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/match1.json",
-				&organizations);
-		MatchManager::newMatch(
-				"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/match2.json",
-				&organizations);
-		MatchManager::newMatch(
-				"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/match3.json",
-				&organizations);
+		// MatchManager::newMatch(
+		// 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/match1.json",
+		// 		&organizations);
+		// MatchManager::newMatch(
+		// 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/match2.json",
+		// 		&organizations);
+		// MatchManager::newMatch(
+		// 		"D:/Documenti/eclipse_workspace/progetto_pa_csgo/src/match3.json",
+		// 		&organizations);
 
 		// caricamento da linux con path relativo
-//		MatchManager::newMatch(
-//		 		"./match1.json",
-//		 		&organizations);
-//		 MatchManager::newMatch(
-//		 		"./match2.json",
-//		 		&organizations);
-//		 MatchManager::newMatch(
-//		 		"./match3.json",
-//		 		&organizations);
+		MatchManager::newMatch(
+		 		"./match1.json",
+		 		&organizations);
+		 MatchManager::newMatch(
+		 		"./match2.json",
+		 		&organizations);
+		 MatchManager::newMatch(
+		 		"./match3.json",
+		 		&organizations);
 
 		// stampa player 1
 		std::cout << p1->toString() << std::endl;
